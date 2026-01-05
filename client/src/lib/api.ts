@@ -3,7 +3,7 @@ export const API_BASE =
   (import.meta.env.VITE_EMPLOYEE_API_BASE as string | undefined) ??
   (import.meta.env.VITE_HR_ADMIN_API as string | undefined) ??
   "http://local-hr-admin.test";
-
+// old v1
 // Universal API wrapper
 export async function api<T>(
   endpoint: string,
