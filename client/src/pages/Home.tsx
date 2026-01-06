@@ -40,9 +40,6 @@ import {
   announcements,
   holidayStats as mockHolidayStats,
   upcomingHolidays,
-  assetInventory,
-  licenseInventory,
-  assetRequests,
 } from "@/lib/mockData";
 
 import {
@@ -80,9 +77,6 @@ export default function Home() {
   const holiday = holidayStats || mockHolidayStats;
   const firstName = user?.employee_name?.split(" ")[0] ?? "Welcome";
   const employmentStatus = user?.hr_employment_status === 1 ? "Active" : "Inactive";
-  const assets = assetInventory;
-  const licenses = licenseInventory;
-  const requests = assetRequests;
 
   return (
     <Layout>
@@ -104,7 +98,7 @@ export default function Home() {
           <div className="md:col-span-2 space-y-6">
             <QuickStats user={user} holiday={holiday} />
             <QuickActions />
-            <AssetSpotlight assets={assets} licenses={licenses} requests={requests} />
+           
             <Announcements />
             <MiniReports />
           </div>
@@ -114,7 +108,6 @@ export default function Home() {
             <HolidayBalance holiday={holiday} />
             <UpcomingHolidayList />
             <UsefulLinks />
-            <DevModePanel user={user} holiday={holiday} />
           </div>
         </motion.div>
       </div>
@@ -244,7 +237,6 @@ function QuickActions() {
     { icon: FileText, label: "Documents", href: "/documents" },
     { icon: Coffee, label: "Holidays", href: "/holidays" },
     { icon: Users, label: "My Team", href: "/team" },
-    { icon: Package, label: "Assets", href: "/assets" },
   ];
 
   return (
@@ -270,78 +262,6 @@ function QuickActions() {
   );
 }
 
-// --------------------------------------------------------
-// Assets & Licenses snapshot
-// --------------------------------------------------------
-function AssetSpotlight({ assets, licenses, requests }: any) {
-  const assigned = assets.filter((a: any) => a.status.toLowerCase() === "in use").length;
-  const expiring = licenses.filter((l: any) => daysUntil(l.renewal) <= 60).length;
-  const openRequests = requests.filter((r: any) => r.status.toLowerCase() !== "approved").length;
-  const nextRenewal = [...licenses].sort((a, b) => toDateSafe(a.renewal) - toDateSafe(b.renewal))[0];
-
-  const tiles = [
-    {
-      icon: Package,
-      label: "Assigned assets",
-      value: `${assigned}/${assets.length}`,
-      hint: "Managed by Tiger Asset Management",
-      color: "text-blue-600",
-    },
-    {
-      icon: KeyRound,
-      label: "Active licenses",
-      value: licenses.length,
-      hint: `${expiring} renewals due soon`,
-      color: "text-emerald-600",
-    },
-    {
-      icon: CalendarClock,
-      label: "Requests in flight",
-      value: openRequests,
-      hint: requests[0]?.item || "Raise a hardware or license request",
-      color: "text-purple-600",
-    },
-  ];
-
-  return (
-    <motion.div variants={item}>
-      <Card className="p-4">
-        <div className="flex items-center justify-between mb-3">
-          <h2 className="text-lg font-heading font-semibold">Assets & Licenses</h2>
-          <Button variant="outline" size="sm" className="gap-2" asChild>
-            <a href="/assets">
-              Manage <ChevronRight className="h-4 w-4" />
-            </a>
-          </Button>
-        </div>
-
-        <div className="grid sm:grid-cols-3 gap-3">
-          {tiles.map((tile, i) => (
-            <Card key={i} className="p-3 border-dashed">
-              <div className="flex items-center gap-3">
-                <div className={`p-3 rounded-lg bg-muted/50 ${tile.color}`}>
-                  <tile.icon className="h-5 w-5" />
-                </div>
-                <div>
-                  <p className="text-xs text-muted-foreground uppercase">{tile.label}</p>
-                  <p className="font-semibold text-lg leading-tight">{tile.value}</p>
-                  <p className="text-[11px] text-muted-foreground">{tile.hint}</p>
-                </div>
-              </div>
-            </Card>
-          ))}
-        </div>
-
-        {nextRenewal && (
-          <div className="mt-3 flex items-center gap-2 text-xs text-muted-foreground">
-            <AlertCircle className="h-4 w-4 text-orange-500" />
-            Next license renewal: {nextRenewal.product} on {nextRenewal.renewal} ({daysUntil(nextRenewal.renewal)} days)
-          </div>
-        )}
-      </Card>
-    </motion.div>
-  );
-}
 
 // --------------------------------------------------------
 // Announcements
@@ -562,54 +482,3 @@ function UsefulLinks() {
   );
 }
 
-// --------------------------------------------------------
-// Developer Debug Panel (DEV MODE ONLY)
-// --------------------------------------------------------
-function DevModePanel({ user, holiday }: any) {
-  if (!import.meta.env.DEV) return null;
-
-  return (
-    <motion.div variants={item}>
-      <Card className="border-red-200 shadow-red-100">
-        <CardHeader className="flex items-center justify-between">
-          <CardTitle className="text-sm flex items-center gap-2 text-red-600">
-            <Bug className="h-4 w-4" /> Developer Debug Panel
-          </CardTitle>
-          <Badge variant="destructive">DEV</Badge>
-        </CardHeader>
-
-        <CardContent className="space-y-3 text-xs">
-          <div>
-            <strong>User:</strong>
-            <pre className="bg-red-50 p-2 text-[10px] mt-1 rounded">
-              {JSON.stringify(user, null, 2)}
-            </pre>
-          </div>
-
-          <div>
-            <strong>Holiday Stats:</strong>
-            <pre className="bg-red-50 p-2 text-[10px] mt-1 rounded">
-              {JSON.stringify(holiday, null, 2)}
-            </pre>
-          </div>
-
-          <Button
-            variant="outline"
-            className="w-full text-xs"
-            onClick={() => window.location.reload()}
-          >
-            Refresh Page
-          </Button>
-
-          <Button
-            variant="ghost"
-            className="w-full text-xs text-red-600"
-            onClick={() => console.clear()}
-          >
-            Clear Console Logs
-          </Button>
-        </CardContent>
-      </Card>
-    </motion.div>
-  );
-}

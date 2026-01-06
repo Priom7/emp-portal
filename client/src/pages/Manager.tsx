@@ -55,7 +55,6 @@ export default function Manager() {
 
   const [search, setSearch] = useState("");
   const [expandAll, setExpandAll] = useState(false);
-  const [showDebug, setShowDebug] = useState(false);
 
   const members = useAppSelector(selectTeamMembers);
   const calendarData = useAppSelector(selectTeamCalendar);
@@ -230,14 +229,7 @@ export default function Manager() {
               <RefreshCcw className="h-4 w-4" />
               Refresh
             </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setShowDebug((prev) => !prev)}
-            >
-              <Code className="h-4 w-4 mr-1" />
-              Debug
-            </Button>
+
           </div>
         </div>
 
@@ -406,25 +398,6 @@ export default function Manager() {
 
         {/* Announcements */}
         <AnnouncementsCard announcements={announcements} />
-
-        {/* Debug view */}
-        {showDebug && (
-          <Card className="mt-4 border-t-4 border-primary/80">
-            <CardHeader>
-              <CardTitle>Developer Debug View</CardTitle>
-              <CardDescription>
-                Raw data structures from API: useful while developing / mapping
-                new features.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4 max-h-[400px] overflow-auto text-xs">
-              <DebugBlock label="User" data={user} />
-              <DebugBlock label="Team Members (Roster)" data={members} />
-              <DebugBlock label="Team Holidays (Calendar)" data={holidays} />
-              <DebugBlock label="Announcements" data={announcements} />
-            </CardContent>
-          </Card>
-        )}
       </div>
     </Layout>
   );
@@ -664,17 +637,6 @@ function RosterItemCard({
               </div>
             </div>
           )}
-
-          {/* Raw JSON for this member */}
-          <details className="bg-gray-50 rounded-md p-2">
-            <summary className="text-[11px] font-semibold cursor-pointer flex items-center gap-1">
-              <Code className="h-3 w-3" />
-              Raw data (JSON)
-            </summary>
-            <pre className="mt-2 max-h-40 overflow-auto whitespace-pre-wrap text-[11px]">
-              {JSON.stringify(member, null, 2)}
-            </pre>
-          </details>
         </div>
       )}
     </div>
@@ -729,23 +691,6 @@ function HolidayItemCard({
           {holiday.status || "Planned"}
         </Badge>
       </div>
-
-      {open && (
-        <div className="mt-3 space-y-2 text-xs">
-          <p className="text-[11px] text-muted-foreground">
-            Holiday record from team calendar API.
-          </p>
-          <details className="bg-gray-50 rounded-md p-2">
-            <summary className="text-[11px] font-semibold cursor-pointer flex items-center gap-1">
-              <Code className="h-3 w-3" />
-              Raw holiday JSON
-            </summary>
-            <pre className="mt-2 max-h-40 overflow-auto whitespace-pre-wrap text-[11px]">
-              {JSON.stringify(holiday, null, 2)}
-            </pre>
-          </details>
-        </div>
-      )}
     </div>
   );
 }
@@ -792,29 +737,6 @@ function AnnouncementsCard({ announcements }: { announcements: any[] }) {
         )}
       </CardContent>
     </Card>
-  );
-}
-
-/* --- Debug block --- */
-
-function DebugBlock({ label, data }: { label: string; data: any }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <details
-      open={open}
-      onToggle={(e) => setOpen((e.target as HTMLDetailsElement).open)}
-      className="bg-slate-950 text-slate-100 rounded-md"
-    >
-      <summary className="cursor-pointer px-3 py-2 text-[11px] font-semibold flex items-center justify-between">
-        <span>{label}</span>
-        <span className="text-[10px] opacity-70">
-          {Array.isArray(data) ? `${data.length} items` : typeof data}
-        </span>
-      </summary>
-      <pre className="px-3 py-2 max-h-40 overflow-auto whitespace-pre-wrap">
-        {JSON.stringify(data, null, 2)}
-      </pre>
-    </details>
   );
 }
 

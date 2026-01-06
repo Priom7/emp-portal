@@ -1,4 +1,4 @@
-export const EMPLOYEE_BASE_PATH = (import.meta.env.VITE_EMPLOYEE_BASE_PATH as string | undefined) ?? "/employee";
+export const EMPLOYEE_BASE_PATH = (import.meta.env.VITE_EMPLOYEE_BASE_PATH as string | undefined) ?? "/";
 export const ADMIN_BASE_PATH = (import.meta.env.VITE_ADMIN_BASE_PATH as string | undefined) ?? "/admin";
 
 export function withEmployeeBase(path = "/") {
