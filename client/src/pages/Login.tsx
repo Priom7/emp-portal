@@ -64,7 +64,7 @@ export default function LoginPage() {
         <div className="relative z-10 max-w-md space-y-6">
           <div className="bg-white p-3 rounded-lg shadow-md w-fit">
             <img
-              src="https://www.planeteducationnetworks.uk/images/logo.png"
+              src="client/public/718e06b1-02db-425c-96c7-08a3dd58455b.png"
               alt="Planet Education Networks"
               className="h-10 w-auto"
             />
