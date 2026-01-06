@@ -4,8 +4,16 @@ import type { RootState } from "@/store";
 
 type RequestState = "idle" | "loading" | "succeeded" | "failed";
 
+interface CheckIn {
+  scanned: string;
+  event_type: "In" | "Out";
+  device_type: string;
+  device_brand: string;
+  screen_location: string;
+}
+
 interface AttendanceState {
-  history: any[];
+  history: CheckIn[];
   totalRecords: number;
   status: RequestState;
   error: string | null;
@@ -19,19 +27,19 @@ const initialState: AttendanceState = {
 };
 
 export const fetchClockHistory = createAsyncThunk<
-  { check_ins: any[]; total_records: number },
-  { page?: number; per_page?: number },
+  { check_ins: CheckIn[]; total_records: number },
+  { page?: number; per_page?: number; scanned_by?: number },
   { rejectValue: string }
 >("attendance/fetchClockHistory", async (params, { rejectWithValue }) => {
   try {
     const res = await Endpoints.clockHistory(params);
-    if (res.data?.success === 1 || Array.isArray(res.data?.check_ins)) {
+    if (res.data?.success === 1 && Array.isArray(res.data?.check_ins)) {
       return {
-        check_ins: res.data.check_ins || [],
-        total_records: res.data.total_records || res.data.check_ins?.length || 0,
+        check_ins: res.data.check_ins,
+        total_records: res.data.total_records || res.data.check_ins.length,
       };
     }
-    return rejectWithValue("Unable to load clock history");
+    return rejectWithValue(res.data?.msg || "Unable to load clock history");
   } catch (err) {
     return rejectWithValue("Failed to load clock history");
   }
@@ -43,7 +51,7 @@ export const clockEvent = createAsyncThunk<void, Record<string, any>, { rejectVa
     try {
       const res = await Endpoints.clockEvent(payload);
       if (res.data?.success !== 1) {
-        return rejectWithValue("Clock event failed");
+        return rejectWithValue(res.data?.msg || "Clock event failed");
       }
     } catch (err) {
       return rejectWithValue("Clock event failed");

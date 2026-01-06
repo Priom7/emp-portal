@@ -20,10 +20,13 @@ export function Sidebar() {
     <aside className="hidden md:flex flex-col w-64 bg-sidebar text-sidebar-foreground border-r border-sidebar-border h-screen sticky top-0 left-0 overflow-y-auto">
       <div className="p-6">
         <div className="flex items-center gap-2 mb-8">
-          <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center">
-            <span className="font-bold text-white">HR</span>
-          </div>
-          <span className="text-xl font-heading font-bold">PeoplePortal</span>
+            <div className="bg-white p-2 rounded-lg shadow-md w-full flex justify-center">
+            <img
+              src="https://www.planeteducationnetworks.uk/images/logo.png"
+              alt="PeoplePortal"
+              className="h-6 w-auto md:h-8 lg:h-10"
+            />
+            </div>
         </div>
 
         <div className="space-y-1">
@@ -109,10 +112,13 @@ export function MobileNav() {
       >
         <div className="p-6">
           <div className="flex items-center gap-2 mb-8">
-            <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center">
-              <span className="font-bold text-white">HR</span>
+          <div className="bg-white p-2 rounded-lg shadow-md w-full flex justify-center">
+            <img
+              src="https://www.planeteducationnetworks.uk/images/logo.png"
+              alt="PeoplePortal"
+              className="h-6 w-auto md:h-8 lg:h-10"
+            />
             </div>
-            <span className="text-xl font-heading font-bold">PeoplePortal</span>
           </div>
 
           <div className="space-y-1">

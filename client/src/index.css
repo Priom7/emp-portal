@@ -300,4 +300,82 @@
 }
 
 
+/* ===============================
+   DARK MODE – CALENDAR OVERRIDES
+   =============================== */
+
+   .dark .calendar-wrapper {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+  }
+  
+  /* Header */
+  .dark .month-label {
+    color: hsl(var(--foreground));
+  }
+  
+  /* Day labels (Mon, Tue, etc.) */
+  .dark .gc-head-cell {
+    color: hsl(var(--muted-foreground));
+  }
+  
+  /* Calendar day cell */
+  .dark .gc-day {
+    background: hsl(var(--secondary));
+    color: hsl(var(--foreground));
+  }
+  
+  /* Hover */
+  .dark .gc-day:hover:not(.gc-day-disabled) {
+    background: hsl(var(--accent));
+    transform: scale(1.04);
+  }
+  
+  /* Today */
+  .dark .gc-day-today {
+    border: 2px solid hsl(var(--primary)) !important;
+    color: hsl(var(--primary)) !important;
+    font-weight: 700;
+  }
+  
+  /* Selected */
+  .dark .gc-day-selected {
+    background: hsl(var(--primary)) !important;
+    color: hsl(var(--primary-foreground)) !important;
+  }
+  
+  /* In range */
+  .dark .gc-day-middle {
+    background: hsl(var(--primary) / 0.35) !important;
+    color: hsl(var(--foreground)) !important;
+  }
+  
+  /* Disabled */
+  .dark .gc-day-disabled {
+    opacity: 0.3;
+    background: repeating-linear-gradient(
+      -45deg,
+      hsl(var(--secondary)),
+      hsl(var(--secondary)) 6px,
+      hsl(var(--muted)) 6px,
+      hsl(var(--muted)) 12px
+    );
+  }
+  
+  /* Approved */
+  .dark .day-approved {
+    background: hsl(160 60% 20%) !important;
+    border: 1px solid hsl(160 60% 45%) !important;
+    color: hsl(160 80% 85%) !important;
+  }
+  
+  /* Pending */
+  .dark .day-pending {
+    background: hsl(38 80% 25%) !important;
+    border: 1px solid hsl(38 92% 50%) !important;
+    color: hsl(48 100% 90%) !important;
+  }
+  
+
 

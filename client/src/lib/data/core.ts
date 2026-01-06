@@ -41,7 +41,7 @@ export const navItems = [
   { icon: Home, label: "Dashboard", href: "/" },
   { icon: CalendarDays, label: "Team Calendar", href: "/manager/calendar", managerOnly: true },
   { icon: ShieldCheck, label: "Manager Hub", href: "/manager", managerOnly: true },
-  { icon: Clock, label: "Time & Attendance", href: "/attendance", managerOnly: true },
+  { icon: Clock, label: "Time & Attendance", href: "/attendance" },
   { icon: Calendar, label: "My Holidays", href: "/holidays" },
   { icon: Users, label: "My Team", href: "/team", managerOnly: true },
   { icon: Briefcase, label: "Employment", href: "/employment" },

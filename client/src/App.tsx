@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Home from "@/pages/Home";
 import Team from "@/pages/Team";
 import { SmartAvatar } from "@/components/SmartAvatar";
+import Attendance from "@/pages/Attendance";
 import Holidays from "@/pages/Holidays";
 import Employment from "@/pages/Employment";
 import Documents from "@/pages/Documents";
@@ -45,6 +46,10 @@ function Router() {
       <Route
         path="/holidays"
         component={() => <ProtectedRoute component={Holidays} />}
+      />
+      <Route
+        path="/attendance"
+        component={() => <ProtectedRoute component={Attendance} />}
       />
       <Route
         path="/employment"

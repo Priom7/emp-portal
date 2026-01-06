@@ -138,7 +138,6 @@ function TopGreeting({ firstName }: { firstName: string }) {
         <Button className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20">
           <Clock className="mr-2 h-4 w-4" /> Clock In
         </Button>
-        <Button variant="outline">Request Time Off</Button>
       </div>
     </div>
   );

@@ -76,12 +76,14 @@ export const Endpoints = {
   },
 
   // --- Attendance ---
-  clockHistory(params: { page?: number; per_page?: number; team_member?: number }) {
+  clockHistory(params: { page?: number; per_page?: number; scanned_by?: number }) {
     return axiosClient.get("/check-in-history.php", {
       params: {
         api_key: API_KEY,
         portal_id: "employee",
-        ...params,
+        scanned_by: params.scanned_by,
+        page: params.page,
+        per_page: params.per_page,
       },
     });
   },
