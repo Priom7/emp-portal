@@ -23,7 +23,7 @@ export function Sidebar() {
             <div className="bg-white p-2 rounded-lg shadow-md w-full flex justify-center">
             <img
               src="https://www.planeteducationnetworks.uk/images/logo.png"
-              alt="PeoplePortal"
+              alt="EmployeePortal"
               className="h-6 w-auto md:h-8 lg:h-10"
             />
             </div>
@@ -115,7 +115,7 @@ export function MobileNav() {
           <div className="bg-white p-2 rounded-lg shadow-md w-full flex justify-center">
             <img
               src="https://www.planeteducationnetworks.uk/images/logo.png"
-              alt="PeoplePortal"
+              alt="EmployeePortal"
               className="h-6 w-auto md:h-8 lg:h-10"
             />
             </div>
@@ -176,7 +176,7 @@ export function Header() {
     <header className="sticky top-0 z-10 w-full bg-background/80 backdrop-blur-md border-b border-border h-16 px-6 flex items-center justify-between">
       <div className="flex items-center gap-4 md:hidden">
         <MobileNav />
-        <span className="font-heading font-bold text-lg">PeoplePortal</span>
+        <span className="font-heading font-bold text-lg">EmployeePortal</span>
       </div>
 
       <div className="hidden md:flex items-center w-full max-w-md relative">
