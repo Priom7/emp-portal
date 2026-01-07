@@ -586,7 +586,7 @@ export default function Holidays() {
           </div>
 
           <div className="flex flex-wrap gap-2 items-center">
-            <Button
+            {/* <Button
               variant="outline"
               onClick={() =>
                 console.log("Holiday policy / documentation requested")
@@ -594,15 +594,15 @@ export default function Holidays() {
             >
               <Info className="h-4 w-4 mr-2" />
               Policy Guide
-            </Button>
+            </Button> */}
 
-            <Button
+            {/* <Button
               variant={debug ? "default" : "outline"}
               onClick={() => setDebug((d) => !d)}
             >
               <Bug className="h-4 w-4 mr-2" />
               Debug
-            </Button>
+            </Button> */}
           </div>
         </div>
 
@@ -652,9 +652,9 @@ export default function Holidays() {
         {/* ------------------------------------------------------------
              CHARTS
         ------------------------------------------------------------- */}
-        {entitlement && (
+        {/* {entitlement && (
           <UsageCharts entitlement={entitlement} requests={requests} />
-        )}
+        )} */}
 
         {/* ------------------------------------------------------------
              BODY LAYOUT
@@ -801,7 +801,7 @@ export default function Holidays() {
         {/* ------------------------------------------------------------
              DEBUG PANEL
         ------------------------------------------------------------- */}
-        {debug && (
+        {/* {debug && (
           <div className="fixed bottom-0 left-0 right-0 z-50 border-t bg-slate-950/95 text-slate-50">
             <div className="max-w-6xl mx-auto px-4 py-3 space-y-3">
               <div className="flex items-center justify-between">
@@ -902,7 +902,7 @@ export default function Holidays() {
               </Tabs>
             </div>
           </div>
-        )}
+        )} */}
       </div>
     </Layout>
   );

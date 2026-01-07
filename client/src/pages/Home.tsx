@@ -96,16 +96,16 @@ export default function Home() {
         >
           {/* LEFT = Main area */}
           <div className="md:col-span-2 space-y-6">
-            <QuickStats user={user} holiday={holiday} />
+            {/* <QuickStats user={user} holiday={holiday} /> */}
             <QuickActions />
            
             <Announcements />
-            <MiniReports />
+            {/* <MiniReports /> */}
           </div>
 
           {/* RIGHT = Sidebar */}
           <div className="space-y-6">
-            <HolidayBalance holiday={holiday} />
+           
             <UpcomingHolidayList />
             <UsefulLinks />
           </div>
@@ -397,8 +397,8 @@ function HolidayBalance({ holiday }: any) {
             indicatorClassName="bg-white"
           />
 
-          <Button className="w-full mt-5 bg-white text-primary font-semibold">
-            Book Holiday
+          <Button asChild className="w-full mt-5 bg-white text-primary font-semibold">
+            <a href="/holidays">Book Holiday</a>
           </Button>
         </CardContent>
       </Card>

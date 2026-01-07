@@ -201,11 +201,6 @@ export default function Employment() {
         value: sickDays,
         icon: Shield,
       },
-      {
-        title: "Job Level",
-        value: profile.job_level || "Standard",
-        icon: Crown,
-      },
     ];
   }, [holidayRequests, absences, startDate, profile.job_level]);
 
@@ -271,14 +266,6 @@ export default function Employment() {
           </div>
 
           <div className="flex gap-2 items-center">
-            <Button
-              size="sm"
-              variant={debug ? "default" : "outline"}
-              onClick={() => setDebug((d) => !d)}
-              className="gap-2"
-            >
-              🐞 Debug
-            </Button>
 
             <Button variant="outline">
               <Download className="mr-2 h-4 w-4" /> Export Profile PDF
@@ -324,14 +311,7 @@ export default function Employment() {
                     startDate={startDate}
                     managerName={managerName}
                   />
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    className="mt-4"
-                    onClick={() => console.log("Profile object:", profile)}
-                  >
-                    Inspect Profile JSON
-                  </Button>
+              
                 </AccordionCard>
 
                 <AccordionCard
@@ -418,40 +398,7 @@ export default function Employment() {
         </Dialog>
 
         {/* DEBUG PANEL */}
-        {debug && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="fixed bottom-0 left-0 right-0 bg-black text-white p-4 max-h-[40vh] overflow-hidden z-50 border-t border-primary"
-          >
-            <div className="flex justify-between items-center mb-2">
-              <h2 className="text-sm font-bold flex items-center gap-2">
-                🐞 Debug Panel
-              </h2>
-              <Button
-                size="sm"
-                variant="secondary"
-                onClick={() => setDebug(false)}
-              >
-                Close
-              </Button>
-            </div>
-            <ScrollArea className="h-[30vh] border border-white/10 rounded-md p-2 text-xs bg-black/40">
-              <pre className="whitespace-pre-wrap break-all">
-                {JSON.stringify(
-                  {
-                    employee,
-                    employmentHistory: sortedEmploymentHistory,
-                    holidayRequests,
-                    absences,
-                  },
-                  null,
-                  2
-                )}
-              </pre>
-            </ScrollArea>
-          </motion.div>
-        )}
+  
       </div>
     </Layout>
   );
