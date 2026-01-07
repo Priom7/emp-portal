@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-  baseURL: "http://hr-admin.test/admin/api-response",
+  baseURL: "http://local-hr-admin.test/admin/api-response",
   withCredentials: true,
 });
 
